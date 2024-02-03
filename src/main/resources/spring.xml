@@ -1,0 +1,60 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    	<bean id="alien1" class="org.example.Alien" scope ="prototype">-->
+    	<bean id="alien" class="org.example.Alien" autowire="byType">
+
+
+            <!-- Construction injection -->
+<!--If both parameters in constructor are of different type then, this can be used in sequential order(If type is not specified) -->
+<!--            <constructor-arg type="int" value="21"/>-->
+<!--            <constructor-arg type="org.example.Laptop" ref="lap1"/>-->
+
+<!--                Indexing always works perfectly-->
+<!--                <constructor-arg index="0" value="21"/>-->
+<!--                <constructor-arg index="1" ref="lap1"/>-->
+
+
+<!--            Works only if parameters are in sequential order OR
+                use ConstructorProperties Annotations in constructor-->
+<!--                <constructor-arg name="lap" ref="lap1"/>-->
+<!--                <constructor-arg name="age" value="21"/>-->
+
+
+
+
+<!--            // Setter Injection-->
+<!--            <property name="age" value="20"/>-->
+
+            <!--Ref Attribute (Inject a object in Alien class)-->
+<!--            <property name="com" ref="com1" />-->
+
+
+<!--For Autowiring : It is used when we don't want to explicitely call property tag for setter injection. We want spring to search for bean itself...
+byName or byType. But if explicitely we have mentioned the setter, autowiring will not work
+-->
+            <property name="age" value="20"/>
+<!--            <property name="com" ref="com1" />-->
+
+
+<!--            If we dont want the laptop to be available for rest of the beans, we can mention it inside the property tag, so that it will be explicitely used by the alien bean only-->
+            <property name="com">
+                <bean id="com2" class="org.example.Laptop">
+                </bean>
+            </property>
+
+
+
+
+        </bean>
+
+<!--    this is the primary bean in case autowiring byType is selected and multiple beans of same type exist-->
+<!--        <bean id="com2" class="org.example.Laptop" primary="true">-->
+<!--        </bean>-->
+
+<!--    Lazy-init will not create object along with container...But when we actually use getBean to create the object, it will be a singleton object-->
+<!--        <bean id="com1" class="org.example.Desktop" lazy-init="true">-->
+<!--        </bean>-->
+</beans>
